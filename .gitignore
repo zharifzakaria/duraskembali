@@ -1,0 +1,19 @@
+# Source art (14 MB, not served by the game). Web-ready copies live in img/
+assets/
+
+# Local scratch / test pages
+_t*.html
+
+# Claude Code local state
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Internal notes, not published
+CLAUDE.md
+README.md
