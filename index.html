@@ -1,5 +1,5 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Duras Kembali?</title><meta name=description content="Bantu Skuad Hijau tewaskan Duras, raksasa sampah! Asingkan sampah ke tong yang betul. Main sekarang!"><meta property=og:type content=website><meta property=og:title content="Duras Kembali?"><meta property=og:description content="Bantu Skuad Hijau tewaskan Duras, raksasa sampah! Asingkan sampah ke tong yang betul. Main sekarang!"><meta property=og:url content="https://zharifzakaria.github.io/duraskembali/"><meta property=og:image content="https://zharifzakaria.github.io/duraskembali/img/share.jpg"><meta property=og:image:width content=1200><meta property=og:image:height content=630><meta name=twitter:card content=summary_large_image><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Pertarungan Akhir Duras</title>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Duras Kembali?</title><meta name=description content="Duras bangkit semula! Bantu Ejen Pembasmi Plastik Sekali Guna menewaskannya dalam satu pertempuran terakhir yang epik. Main sekarang!"><meta property=og:type content=website><meta property=og:title content="Duras Kembali?"><meta property=og:description content="Duras bangkit semula! Bantu Ejen Pembasmi Plastik Sekali Guna menewaskannya dalam satu pertempuran terakhir yang epik. Main sekarang!"><meta property=og:url content="https://zharifzakaria.github.io/duraskembali/"><meta property=og:image content="https://zharifzakaria.github.io/duraskembali/img/share.jpg"><meta property=og:image:width content=1200><meta property=og:image:height content=630><meta name=twitter:card content=summary_large_image><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@ h1 span{color:var(--sun);display:block}
 </style>
 
 <div id="app">
-  <canvas id="game" aria-label="Medan pertarungan Skuad Hijau menentang Duras"></canvas>
+  <canvas id="game" aria-label="Medan pertempuran Ejen Pembasmi menentang Duras"></canvas>
   <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
   <button id="muteBtn" class="mute" aria-label="Senyapkan muzik" aria-pressed="false" hidden>
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path id="waves" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/><path id="cross" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M16 9l5 6M21 9l-5 6" style="display:none"/></svg>
@@ -68,9 +68,9 @@ h1 span{color:var(--sun);display:block}
   <section class="overlay" id="titleScreen">
     <div class="inner">
       <img class="emblem" src="img/duras-emblem.png" alt="Duras">
-      <div class="eyebrow">Skuad Hijau · Misi Selamatkan Bumi</div>
-      <h1>Pertarungan Akhir<span>Kalahkan Duras!</span></h1>
-      <p class="lede">Duras, raksasa sampah, mahu mencemarkan sekolah kita. Bantu Skuad Hijau menewaskannya!</p>
+      <div class="eyebrow">Ejen Pembasmi Plastik Sekali Guna</div>
+      <h1>Pertempuran Terakhir<span>Tewaskan Duras!</span></h1>
+      <p class="lede">Duras bangkit semula daripada kematian! Ejen Pembasmi Plastik Sekali Guna mesti menewaskannya dalam satu pertempuran epik yang terakhir.</p>
       <button class="btn" id="startBtn">MULA BERTARUNG</button>
     </div>
   </section>
@@ -83,8 +83,8 @@ h1 span{color:var(--sun);display:block}
 
   <section class="overlay" id="winScreen" hidden>
     <div class="inner">
-      <img class="hero" src="img/squad-cheer.png" alt="Skuad Hijau meraikan kemenangan">
-      <div class="eyebrow">Misi berjaya</div>
+      <img class="hero" src="img/squad-cheer.png" alt="Ejen Pembasmi meraikan kemenangan">
+      <div class="eyebrow">Pertempuran terakhir dimenangi</div>
       <h1>Duras<span>Tewas!</span></h1>
       <div class="tally">
         <img class="lockup" src="img/lockup.png" alt="Ejen Pembasmi: Plastik Sekali Guna">
@@ -437,9 +437,9 @@ function showWin(){bumpTally();
 const cut=document.getElementById('cutscene'),cutText=document.getElementById('cutText'),cutImg=document.getElementById('cutImg'),cutStep=document.getElementById('cutStep');
 // dialog = tiga arahan permainan, satu untuk setiap Ejen; [kedudukan ekor bubble]
 const SCENES=[
-  {img:'img/ejen/ejen01.png',tail:'30%',text:'Seret jari ke kiri dan kanan untuk halakan pancaran Skuad Hijau ke arah Duras.'},
+  {img:'img/ejen/ejen01.png',tail:'30%',text:'Duras bangkit semula! Inilah pertempuran terakhir kita. Seret jari ke kiri dan kanan untuk halakan pancaran ke arah Duras.'},
   {img:'img/ejen/ejen02.png',tail:'40%',text:'Sampah akan jatuh. Seret ke tong yang betul dalam masa 4 saat.'},
-  {img:'img/ejen/ejen03.png',tail:'50%',text:'Sampah yang tertinggal atau masuk tong salah akan diserap Duras. Nyawanya bertambah!'}
+  {img:'img/ejen/ejen03.png',tail:'50%',text:'Sampah yang tertinggal atau masuk tong salah akan diserap Duras. Nyawanya bertambah! Menanglah pertempuran epik ini, Ejen!'}
 ];
 let sceneI=0;
 function showScene(){
