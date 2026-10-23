@@ -22,7 +22,7 @@ html,body{height:100%}
 body{margin:0;background:var(--night);color:var(--ink);font-family:var(--body);overflow:hidden}
 #app{position:relative;height:100%;max-width:480px;margin:0 auto;overflow:hidden;background:#2b2734}
 canvas{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none}
-.overlay{position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;padding:28px 20px;background:linear-gradient(rgba(12,17,14,.55),rgba(12,17,14,.8)),url(img/bg.jpg) center/cover;overflow-y:auto}
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;padding:28px 20px;background:linear-gradient(rgba(12,17,14,.55),rgba(12,17,14,.8)),url(img/ui/bg-menu.jpg) center bottom/cover;overflow-y:auto}
 .hero{display:block;margin:0 auto;max-width:100%;max-height:150px;object-fit:contain}
 .emblem{width:84px;height:auto;align-self:center}
 #titleScreen,#winScreen,#titleScreen .inner,#winScreen .inner{text-align:center;align-items:center}
@@ -33,10 +33,10 @@ canvas{display:block;width:100%;height:100%;touch-action:none;user-select:none;-
 h1{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,10vw,2.9rem);line-height:.98;margin:0;text-wrap:balance;letter-spacing:.01em}
 h1 span{color:var(--sun);display:block}
 .lede{margin:0;font-size:1.05rem;line-height:1.45;color:var(--ink);max-width:34ch}
-.btn{font-family:var(--display);font-size:1.35rem;letter-spacing:.04em;border:0;border-radius:14px;padding:16px 20px;background:var(--leaf);color:#0f2412;cursor:pointer;box-shadow:0 5px 0 #2f8a3a;transition:transform .08s}
-.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #2f8a3a}
+.btn{font-family:var(--display);font-size:1.35rem;letter-spacing:.04em;border:0;padding:0 0 3.4%;width:100%;max-width:420px;aspect-ratio:1097/200;background:url(img/ui/btn-primary.png) center/100% 100% no-repeat;color:#10200c;cursor:pointer;transition:transform .08s}
+.btn:active{transform:translateY(3px)}
 .btn:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
-.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px #3c5546;font-size:1.05rem;padding:12px}
+.btn.ghost{background-image:url(img/ui/btn-ghost.png);aspect-ratio:1079/140;color:var(--ink);font-size:1.05rem;padding-bottom:2.2%}
 .tally{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;background:var(--panel);border-radius:14px;padding:12px 14px}
 .lockup{width:150px;max-width:55%;height:auto}
 .tally .num{font-family:var(--display);font-size:3rem;line-height:1.1;color:var(--sun);font-variant-numeric:tabular-nums}
@@ -130,7 +130,7 @@ const BINS=[
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 
 const IMG={};
-for(const [k,f] of Object.entries({duras:'duras.png',squad:'squad.png',squadCheer:'squad-cheer.png'})){IMG[k]=new Image();IMG[k].src='img/'+f;}
+for(const [k,f] of Object.entries({duras:'duras.png',squad:'squad.png',squadCheer:'squad-cheer.png',hpFrame:'ui/hp-frame.png',hpFill:'ui/hp-fill.png',hpFillLow:'ui/hp-fill-low.png',skyFx:'ui/sky-fx.png'})){IMG[k]=new Image();IMG[k].src='img/'+f;}
 function sprite(file,max=46){const im=new Image();im.src='img/trash/'+file+'.png';return c=>{if(!im.naturalWidth)return;const s=max/Math.max(im.naturalWidth,im.naturalHeight),w=im.naturalWidth*s,h=im.naturalHeight*s;c.drawImage(im,-w/2,-h/2,w,h);};}
 const TYPES=[
  {name:'Surat khabar',bin:0,draw:sprite('newspaper',50)},
@@ -249,6 +249,8 @@ function drawBg(){
   // smog
   const sa=(1-k)*.35;
   if(sa>.01){ctx.fillStyle=`rgba(60,52,48,${sa})`;for(let i=0;i<5;i++){const x=((S.clock*12+i*137)%(W+160))-80;ctx.beginPath();ctx.ellipse(x,L.hudH+60+i*48,90,26,0,0,Math.PI*2);ctx.fill();}}
+  // serpihan warna (Ejen Pembasmi) di atas langit
+  if(IMG.skyFx.naturalWidth){const w=Math.max(W,L.groundTop*1.2),h=w*424/600;ctx.save();ctx.beginPath();ctx.rect(0,0,W,L.groundTop);ctx.clip();ctx.globalAlpha=.22;ctx.drawImage(IMG.skyFx,(W-w)/2,L.groundTop-h,w,h);ctx.restore();}
   // sun appears
   if(k>.3){ctx.fillStyle=`rgba(255,226,120,${(k-.3)})`;ctx.beginPath();ctx.arc(W*.82,L.hudH+70,26,0,Math.PI*2);ctx.fill();}
   // school silhouette
@@ -345,8 +347,14 @@ function drawHud(){
   ctx.textBaseline='middle';ctx.textAlign='left';
   ctx.font="18px 'Russo One', 'Arial Black', sans-serif";ctx.fillStyle='#c9a6ff';ctx.fillText('DURAS',16,21);
   const bx=16,by=36,bw=W-32-70,bh=14,hp=Math.max(0,S.hp)/100;
-  ctx.fillStyle='#2a2430';rr(ctx,bx,by,bw,bh,7);ctx.fill();
-  if(hp>0){ctx.fillStyle=hp<.3?'#ff6b5d':'#9b7bb8';rr(ctx,bx,by,Math.max(14,bw*hp),bh,7);ctx.fill();}
+  const fr=IMG.hpFrame,fl=hp<.3?IMG.hpFillLow:IMG.hpFill;
+  if(fr.naturalWidth&&fl.naturalWidth){
+    const fh=bw*90/1030,fy=by+bh/2-fh/2;ctx.drawImage(fr,bx,fy,bw,fh);
+    if(hp>0){ // isi dipotong dengan hujung kanan condong
+      const k=bw/1030,tx=bx+25.9*k,ty=fy+21*k,xr=Math.max(30,978*hp),sl=24;
+      ctx.save();ctx.translate(tx,ty);ctx.scale(k,k);ctx.beginPath();ctx.moveTo(sl,0);ctx.lineTo(xr,0);ctx.lineTo(xr-sl,48);ctx.lineTo(0,48);ctx.closePath();ctx.clip();ctx.drawImage(fl,0,0);ctx.restore();
+    }
+  }
   ctx.fillStyle='#fff';ctx.font="700 12px 'Montserrat', sans-serif";ctx.textAlign='right';ctx.fillText(Math.ceil(S.hp)+'%',bx+bw-6,by+bh/2+1);
   ctx.font="22px 'Russo One', 'Arial Black', sans-serif";ctx.fillStyle='#ffd23f';ctx.fillText(fmt(S.t),W-16,L.hudH/2);
   if(S.mode==='play'&&S.hintT>0){ctx.globalAlpha=Math.min(1,S.hintT);ctx.textAlign='center';ctx.font="17px 'Russo One', 'Arial Black', sans-serif";ctx.lineWidth=4;ctx.strokeStyle='rgba(0,0,0,.6)';const s='Seret jari untuk halakan pancaran!';ctx.strokeText(s,W/2,L.squadTop-90);ctx.fillStyle='#fff';ctx.fillText(s,W/2,L.squadTop-90);ctx.globalAlpha=1;}
